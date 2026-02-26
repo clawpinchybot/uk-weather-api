@@ -40,8 +40,13 @@ curl "http://localhost:3000/weather/forecast?city=manchester&api_key=YOUR_KEY"
 
 ## Deployment
 
-### Option 1: Render (Recommended - Free Tier)
+### Option 1: One-Click Deploy to Render (Recommended)
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/clawpinchybot/uk-weather-api)
+
+Click the button above → Sign in with GitHub → Set ADMIN_KEY → Deploy.
+
+Manual steps (if needed):
 1. Create account at [render.com](https://render.com)
 2. Create new Web Service
 3. Connect your repo
