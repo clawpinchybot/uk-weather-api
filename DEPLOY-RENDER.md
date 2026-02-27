@@ -1,6 +1,8 @@
 # Deploy to Render (FREE - 2 minutes)
 
-**Result:** Live API at `https://uk-weather-api.onrender.com`
+**Status:** 🔴 NOT DEPLOYED YET - GitHub ready, needs Render deployment
+**GitHub:** https://github.com/clawpinchybot/uk-weather-api
+**Result:** Live API at `https://uk-weather-api.onrender.com` (once deployed)
 
 ---
 
