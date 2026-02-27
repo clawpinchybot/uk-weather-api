@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK Weather API - Met Office DataPoint Replacement</title>
+    <meta name="description" content="Free UK weather API. Replacement for retired Met Office DataPoint. Simple, reliable, built for Home Assistant and IoT projects.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        h1 { font-size: 3em; margin-bottom: 10px; }
+        .subtitle { font-size: 1.3em; opacity: 0.9; margin-bottom: 30px; }
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover { transform: translateY(-2px); }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .feature {
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+        .feature h3 { color: #667eea; margin-bottom: 15px; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .price-card {
+            padding: 30px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .price-card.popular {
+            background: #667eea;
+            color: white;
+        }
+        .price { font-size: 2.5em; font-weight: bold; margin: 20px 0; }
+        .price span { font-size: 0.4em; color: #666; }
+        .popular .price span { color: #ddd; }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌤️ UK Weather API</h1>
+        <p class="subtitle">The Met Office DataPoint replacement you've been looking for</p>
+        <div class="alert" style="background: rgba(255,255,255,0.2); border-left: 4px solid white; color: white;">
+            <strong>📢 DataPoint Retired:</strong> The Met Office DataPoint API was retired on December 1, 2025.
+            This is your migration path.
+        </div>
+        <a href="#get-started" class="cta-button">Get Started Free →</a>
+        <a href="https://github.com/clawpinchybot/uk-weather-api" class="cta-button" style="background: transparent; border: 2px solid white; color: white;">View on GitHub</a>
+    </header>
+
+    <div class="alert">
+        <strong>🏠 Home Assistant Users:</strong> Looking for a DataPoint replacement? 
+        <a href="https://github.com/clawpinchybot/uk-weather-api/blob/main/MET-OFFICE-MIGRATION.md">See our migration guide →</a>
+    </div>
+
+    <section>
+        <h2>Why UK Weather API?</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>🇬🇧 UK-Focused</h3>
+                <p>Built specifically for UK weather. 15 major cities pre-configured with accurate, local data.</p>
+            </div>
+            <div class="feature">
+                <h3>⚡ Simple & Fast</h3>
+                <p>Clean REST API. No complex authentication. Just <code>GET /current?city=london</code></p>
+            </div>
+            <div class="feature">
+                <h3>🔄 Drop-in Replacement</h3>
+                <p>Designed to replace Met Office DataPoint. Easy migration for existing integrations.</p>
+            </div>
+            <div class="feature">
+                <h3>💰 Fair Pricing</h3>
+                <p>Free tier: 100 requests/hour. Pro: £9/month. No complex tiers, no surprises.</p>
+            </div>
+            <div class="feature">
+                <h3>🏠 Home Assistant Ready</h3>
+                <p>Works with Home Assistant REST sensors. Migration guide included.</p>
+            </div>
+            <div class="feature">
+                <h3>🚀 Self-Hostable</h3>
+                <p>Deploy your own instance in 2 minutes. One-click Render deploy available.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Quick Start</h2>
+        <pre><code># Get current weather for London
+curl "https://uk-weather-api.onrender.com/current?city=london&key=demo"
+
+# Response
+{
+  "city": "london",
+  "temperature": 12,
+  "condition": "Partly cloudy",
+  "humidity": 78,
+  "wind_speed": 15,
+  "wind_direction": "SW",
+  "feels_like": 10
+}</code></pre>
+
+        <h3 style="margin-top: 30px;">7-Day Forecast</h3>
+        <pre><code>curl "https://uk-weather-api.onrender.com/forecast?city=manchester&key=demo"
+
+# Returns daily forecasts for next 7 days</code></pre>
+    </section>
+
+    <section id="get-started">
+        <h2>Pricing</h2>
+        <div class="pricing">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="price">£0<span>/month</span></div>
+                <ul style="text-align: left; margin: 20px 0;">
+                    <li>✅ 100 requests/hour</li>
+                    <li>✅ 15 UK cities</li>
+                    <li>✅ Current weather</li>
+                    <li>✅ 7-day forecast</li>
+                    <li>✅ Community support</li>
+                </ul>
+                <a href="#" class="cta-button" style="display: block; margin-top: 20px; color: #667eea;">Start Free</a>
+            </div>
+            <div class="price-card popular">
+                <h3>Pro</h3>
+                <div class="price">£9<span>/month</span></div>
+                <ul style="text-align: left; margin: 20px 0;">
+                    <li>✅ 1,000 requests/hour</li>
+                    <li>✅ Any UK location</li>
+                    <li>✅ Priority support</li>
+                    <li>✅ 99.9% uptime SLA</li>
+                    <li>✅ Email support</li>
+                </ul>
+                <a href="#" class="cta-button" style="display: block; margin-top: 20px;">Get Pro</a>
+            </div>
+            <div class="price-card">
+                <h3>Business</h3>
+                <div class="price">£49<span>/month</span></div>
+                <ul style="text-align: left; margin: 20px 0;">
+                    <li>✅ Unlimited requests</li>
+                    <li>✅ Worldwide locations</li>
+                    <li>✅ Dedicated support</li>
+                    <li>✅ Custom integrations</li>
+                    <li>✅ SLA guarantee</li>
+                </ul>
+                <a href="#" class="cta-button" style="display: block; margin-top: 20px; color: #667eea;">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Supported Cities</h2>
+        <p style="margin: 20px 0;">
+            <code>london</code> • <code>manchester</code> • <code>birmingham</code> • <code>edinburgh</code> • 
+            <code>bristol</code> • <code>leeds</code> • <code>liverpool</code> • <code>newcastle</code> • 
+            <code>sheffield</code> • <code>cardiff</code> • <code>glasgow</code> • <code>belfast</code> • 
+            <code>nottingham</code> • <code>southampton</code> • <code>brighton</code>
+        </p>
+        <p><strong>Pro tier:</strong> Any UK location via coordinates or postcode.</p>
+    </section>
+
+    <section>
+        <h2>Home Assistant Integration</h2>
+        <pre><code># configuration.yaml
+sensor:
+  - platform: rest
+    name: Weather London
+    resource: https://uk-weather-api.onrender.com/current?city=london&key=YOUR_KEY
+    json_attributes:
+      - temperature
+      - condition
+      - humidity
+    value_template: '{{ value_json.temperature }}'
+    unit_of_measurement: '°C'</code></pre>
+        <p style="margin-top: 15px;">
+            <a href="https://github.com/clawpinchybot/uk-weather-api/blob/main/MET-OFFICE-MIGRATION.md">
+                → Full migration guide from Met Office DataPoint
+            </a>
+        </p>
+    </section>
+
+    <footer>
+        <p>
+            Built by <a href="https://github.com/clawpinchybot">Sterling</a> • 
+            <a href="https://github.com/clawpinchybot/uk-weather-api">GitHub</a> • 
+            <a href="https://github.com/clawpinchybot/uk-weather-api/issues">Support</a>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9em;">
+            Data provided by <a href="https://open-meteo.com/">Open-Meteo</a> • 
+            Not affiliated with the Met Office
+        </p>
+    </footer>
+</body>
+</html>
